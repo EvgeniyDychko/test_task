@@ -16,28 +16,10 @@ class NoticeList(APIView):
         serializer = NoticeSerializer(notices, many=True)
         return Response(serializer.data)
     
-    def post(self):
-        pass
-
-
-# class NoticeListView(ListView):
-
-#     # Нижеуказанные параметры можно также передать данному отображению через метод as_view()
-#     # url(r'^$', Posts.as_view(context_object_name='posts', template_name='posts.html))
-#     model = Notice
-#     # Под данным именем наш список статей будет доступен в шаблоне
-#     context_object_name = 'notices'
-#     # Название шаблона
-#     template_name = 'index.html'
-#     # Количество объектов на 1 страницу
-#     # paginate_by = 10  
-
-# class NoticeCreateView(CreateView):
-# 	model = Post
-# 	fields = ['title','text']
 
 class NoticeOrderView(FormMixin, ListView):
     context_object_name = 'notices'
+    ordering = ['-numbers']
     template_name = 'index.html'
     success_url = '/'
     form_class = NoticeForm
@@ -51,7 +33,6 @@ class NoticeOrderView(FormMixin, ListView):
             return self.form_invalid(form)
 
     def form_valid(self, form):
-        print(form.fields)
         form.save()
         return super().form_valid(form)
 

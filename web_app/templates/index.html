@@ -26,6 +26,7 @@
 		</form>
 	</div> 
     {% for notice in notices %}
+
 		<article class="media content-section">
           <div class="media-body">
             <div class="article-metadata">
@@ -35,6 +36,7 @@
             <p class="article-content">{{ notice.text }}</p>
           </div>
 		</article>
+		<p> Number of unique: {{notice.numbers}} </p>
 	{% endfor %}
 </body>
 </html>
